@@ -23,8 +23,7 @@ describe('CurrencyComponent', () => {
     ]);
 
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, FormsModule],
-      declarations: [CurrencyComponent],
+      imports: [HttpClientTestingModule, FormsModule, CurrencyComponent], // Importowanie CurrencyComponent zamiast deklaracji
       providers: [{ provide: CurrencyService, useValue: currencyServiceSpy }],
     }).compileComponents();
 
@@ -56,7 +55,7 @@ describe('CurrencyComponent', () => {
   it('should fetch specific date rates', () => {
     const mockRates: CurrencyRate[] = [
       { currency: 'USD', rate: '1.23', date: new Date() },
-      { currency: 'EUR', rate: '0,89', date: new Date() },
+      { currency: 'EUR', rate: '0.89', date: new Date() },
     ];
     currencyService.getSpecyficDateRates.and.returnValue(of(mockRates));
     component.selectedDate = '2024-06-11';
@@ -85,5 +84,15 @@ describe('CurrencyComponent', () => {
       '2024-06-12'
     );
     expect(component.currencyRates).toEqual(mockRates);
+  });
+
+  it('should set isRatesEmpty to true if no rates are returned', () => {
+    currencyService.getCurrentRates.and.returnValue(of([]));
+
+    component.CurrentCurrency();
+
+    expect(currencyService.getCurrentRates).toHaveBeenCalled();
+    expect(component.currencyRates).toEqual([]);
+    expect(component.isRatesEmpty).toBe(true);
   });
 });

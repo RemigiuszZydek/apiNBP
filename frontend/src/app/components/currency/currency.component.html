@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="action-container">
+    <button class="button" (click)="fetchCurrentRates()">
+      Pobierz dzisiejsze kursy
+    </button>
+  </div>
+
+  <div class="action-container">
+    <input type="date" [(ngModel)]="selectedDate" class="input-date" />
+    <button class="button" (click)="fetchSpecyficDateRates()">
+      Pobierz kursy dla wybranej daty
+    </button>
+  </div>
+
+  <div class="action-container">
+    <input type="date" [(ngModel)]="selectedStartDate" class="input-date" />
+    <input type="date" [(ngModel)]="selectedEndDate" class="input-date" />
+    <button class="button" (click)="fetchDateRangeRates()">
+      Pobierz kursy dla wybranego okresu
+    </button>
+  </div>
+</div>
+
+<div class="section">
+  <ng-container *ngIf="currencyRates && currencyRates.length > 0">
+    <ng-container *ngFor="let rate of currencyRates; let i = index">
+      <div
+        class="data-table"
+        *ngIf="i === 0 || currencyRates[i - 1].date !== rate.date"
+      >
+        <h3>{{ rate.date }}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Waluta</th>
+              <th>Kurs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let r of currencyRates">
+              <tr *ngIf="r.date === rate.date">
+                <td>{{ r.currency }}</td>
+                <td>{{ r.rate }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="isRatesEmpty">
+    <p>Brak kursów na dziś</p>
+  </ng-container>
+</div>

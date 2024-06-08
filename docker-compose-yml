@@ -1,0 +1,39 @@
+version: "3.12"
+
+services:
+  db:
+    db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=DDAP
+      - POSTGRES_USER=DDAP
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "5433:5432"
+
+  backend:
+    build: ./backend/api/
+    container_name: django_backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend/api/:/backend/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+
+  frontend:
+    build: ./frontend/
+    container_name: angular_frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    environment:
+      - CHOKIDAR_USEPOLLING=true

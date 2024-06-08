@@ -20,7 +20,7 @@ export class CurrencyComponent {
 
   constructor(private currencyService: CurrencyService) {}
 
-  fetchCurrentRates() {
+  CurrentCurrency() {
     this.currencyService
       .getCurrentRates()
       .subscribe((rates: CurrencyRate[]) => {
@@ -29,7 +29,7 @@ export class CurrencyComponent {
       });
   }
 
-  fetchSpecyficDateRates() {
+  DateCurrency() {
     this.currencyService
       .getSpecyficDateRates(this.selectedDate)
       .subscribe((rates: CurrencyRate[]) => {
@@ -38,7 +38,7 @@ export class CurrencyComponent {
       });
   }
 
-  fetchDateRangeRates() {
+  DateRangeCurrency() {
     this.currencyService
       .getDateRangeRates(this.selectedStartDate, this.selectedEndDate)
       .subscribe((rates: CurrencyRate[]) => {

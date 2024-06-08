@@ -47,7 +47,7 @@ describe('CurrencyComponent', () => {
     ];
     currencyService.getCurrentRates.and.returnValue(of(mockRates));
 
-    component.fetchCurrentRates();
+    component.CurrentCurrency();
 
     expect(currencyService.getCurrentRates).toHaveBeenCalled();
     expect(component.currencyRates).toEqual(mockRates);
@@ -61,7 +61,7 @@ describe('CurrencyComponent', () => {
     currencyService.getSpecyficDateRates.and.returnValue(of(mockRates));
     component.selectedDate = '2024-06-11';
 
-    component.fetchSpecyficDateRates();
+    component.DateCurrency();
 
     expect(currencyService.getSpecyficDateRates).toHaveBeenCalledWith(
       '2024-06-11'
@@ -78,7 +78,7 @@ describe('CurrencyComponent', () => {
     component.selectedStartDate = '2024-06-11';
     component.selectedEndDate = '2024-06-12';
 
-    component.fetchDateRangeRates();
+    component.DateRangeCurrency();
 
     expect(currencyService.getDateRangeRates).toHaveBeenCalledWith(
       '2024-06-11',

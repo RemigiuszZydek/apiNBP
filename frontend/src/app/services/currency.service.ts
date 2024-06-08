@@ -7,7 +7,7 @@ import { CurrencyRate } from './currency.interface';
   providedIn: 'root',
 })
 export class CurrencyService {
-  private apiBaseUrl = 'http://127.0.0.1:8080';
+  private apiBaseUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) {}
 

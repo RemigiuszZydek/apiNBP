@@ -14,7 +14,7 @@ Follow these steps to set up and run the project locally.
 ### 1. Clone the repository
 
 ```bash
-git clone [<link>](https://github.com/RemigiuszZydek/apiNBP.git)
+git clone https://github.com/RemigiuszZydek/apiNBP.git
 ```
 ### 2. Navigate to the project directory
 ```bash
